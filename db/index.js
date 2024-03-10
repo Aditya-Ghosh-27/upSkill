@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const MONGODB_URL = require("dotenv").config();
 
-mongoose.connect('');
+mongoose.connect(process.env.MONGODB_URL);
 
 // Schema definition here
 const AdminSchema = new mongoose.Schema({

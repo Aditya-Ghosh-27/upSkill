@@ -65,6 +65,6 @@ router.get("/purchasedCourses", userMiddleware, async (req, res) => {
       courses: _id
     })
   });
-});
+
 
 module.exports = router

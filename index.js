@@ -7,8 +7,8 @@ app.use(express.json());
 app.use("/admin", adminRouter);
 app.use("/user", userRouter);
 
-const PORT = 3000;
+
 
 app.listen(PORT, () => {
-    console.log(`Server is starting on port: ${PORT}`)
+    console.log(`Server is starting on port: ${process.env.PORT}`)
 });
