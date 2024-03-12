@@ -34,7 +34,28 @@ router.post('/signin', async (req, res) => {
     const password = req.body.password;
     console.log(JWT_SECRET);
 
-    
+    const user = await User.find({
+        username,
+        password
+    })
+
+    // Uniq
+    const objId = user._id;
+
+    if(user){
+        const token = jwt.sign({
+            username,
+            objId
+        }, JWT_SECRET);
+
+        res.json({
+            token
+        })
+    } else{
+        res.sendStatus(411).json({
+            message: "Incorrect email and password"
+        })
+    }
 });
 
 router.get('/courses', async (req, res) => {
