@@ -2,12 +2,22 @@ const { Router } = require("express");
 const adminMiddleware = require("../middleware/admin");
 const { Admin, Course } = require("../db/index");
 const router = Router();
+const zod = require("zod");
+const passwordSchema = zod.string().min(6);
 
 // Admin routes
 router.post('/signup', async (req, res) => {
     // Implement admin signup logic
     const username = req.body.username;
     const password = req.body.password;
+    const result = passwordSchema.safeParse(password);
+
+    // Input validation
+    if(!result.success){
+        return res.json({
+            message : "Password should atleast be of 6 characters"
+        });
+    }
 
     await Admin.create({
         username: username,
