@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const jwt = require("jsonwebtoken");
 const router = Router();
 const { User, Course} = require("../db/index");
 const userMiddleware = require("../middleware/user");
