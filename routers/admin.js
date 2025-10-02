@@ -60,7 +60,7 @@ router.post('/signin', async (req, res) => {
 
 });
 
-router.post('courses', async (req, res) => {
+router.post('/courses', async (req, res) => {
     // Implement courses ccreation logic
     const title = req.body.title;
     const descriptiom = req.body.description;
