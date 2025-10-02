@@ -35,13 +35,13 @@ router.post('/signin', async (req, res) => {
     const password = req.body.password;
     console.log(JWT_SECRET);
 
-    const user = await User.find({
+    const admin = await Admin.find({
         username,
         password
     });
 
     // Unique object id
-    const objId = user._id;
+    const objId = admin._id;
 
     if(user){
         const token = jwt.sign({
