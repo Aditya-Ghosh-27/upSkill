@@ -88,20 +88,32 @@ router.post('/courses/:courseId', userMiddleware, (req, res) => {
 });
 
 router.get("/purchasedCourses", userMiddleware, async (req, res) => {
-    // Implement fetching purchased courses logic
-    const user = await User.findOne({
-      username: req.headers.username
-    });
-    console.log(user.purchasedCourses);
-    const courses = await Course.find({
-      _id: {
-        "$in" : user.purchasedCourses
-      }
-    });
-    res.json({
-      courses: _id
-    })
-  });
+    try {
+        // Find user
+        const user = await User.findOne({
+            username: req.headers.username
+        });
 
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        console.log(user.purchasedCourses);
+
+        // Find purchased courses
+        const courses = await Course.find({
+            _id: {
+                "$in": user.purchasedCourses
+            }
+        });
+
+        res.json({
+            courses: courses
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
 
 module.exports = router
