@@ -43,7 +43,7 @@ router.post('/signin', async (req, res) => {
     // Unique object id
     const objId = admin._id;
 
-    if(user){
+    if(admin){
         const token = jwt.sign({
             username,
             objId
