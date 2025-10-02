@@ -60,7 +60,7 @@ router.post('/signin', async (req, res) => {
 
 });
 
-router.post('/courses', async (req, res) => {
+router.post('/courses', adminMiddleware, async (req, res) => {
     // Implement courses ccreation logic
     const title = req.body.title;
     const descriptiom = req.body.description;
@@ -80,7 +80,7 @@ router.post('/courses', async (req, res) => {
     });
 });
 
-router.get('/courses', async (req, res) => {
+router.get('/courses', adminMiddleware, async (req, res) => {
     // Implement fetching all courses logic
     const response = await Course.find({});
 
