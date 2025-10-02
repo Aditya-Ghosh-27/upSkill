@@ -19,7 +19,12 @@ router.post('/signup', async (req, res) => {
             message : "Password should atleast be of 6 characters"
         });
     }
-
+    
+    // if the username already exists then send the below response
+    if(await Admin.findOne({username})){
+        return res.status(403).json({msg : "Username already exists"}); 
+    }
+    
     await Admin.create({
         username: username,
         password: password
